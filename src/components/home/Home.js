@@ -28,18 +28,14 @@ function Home(props) {
                     setUserName(user.displayName)
                     // setNaming(user.displayName)
                 } else {
-                    setUserName('')
+                    navigate('/')
+                    
                 }
-                console.log(user.displayName);
-                // if (userName = '') {
-                //     return
-                // } else {
-                // onReadHandler()
-
-                // }
+                // console.log(user.displayName);
+               
             })
         } catch (error) {
-            console.log(error, 'error in use effect')
+            // console.log(error, 'error in use effect')
         }
     }, [])
 

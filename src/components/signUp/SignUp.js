@@ -25,7 +25,7 @@ function SignUp() {
             await updateProfile(user, {
                 displayName: values.name
             })
-            navigate('/signup')
+            navigate('/todo')
             console.log('user', user);
         })
             .catch((err) => {

@@ -21,7 +21,7 @@ function Login() {
         setSubmitButtonDisabled(true)
         signInWithEmailAndPassword(auth, values.email, values.password).then(async (res) => {
             setSubmitButtonDisabled(false)
-            navigate('/signup')
+            navigate('/todo')
         })
             .catch((err) => {
                 setSubmitButtonDisabled(false)

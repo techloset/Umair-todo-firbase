@@ -22,7 +22,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/signup' element={<Home />} />
+        <Route path='/todo' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/' element={<SignUp />} />
 
