@@ -1,5 +1,4 @@
 import React from 'react'
-import InputControl from '../inputControl/InputControl'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
@@ -61,7 +60,7 @@ function Login() {
                 <div className="mt-8 flex flex-col justify-center">
                     <b className="text-red-500">{errMes}</b>
                     <button
-                        className="px-8 py-2 bg-sky-400 text-black rounded-md hover:bg-sky-600 transition-colors duration-300"
+                        className="px-8 py-2 bg-sky-400 text-black hover:text-white rounded-md hover:bg-sky-600 transition-colors duration-600 "
                         onClick={handleSubmission}
                         disabled={submitButtonDisabled}
                     >
@@ -69,8 +68,8 @@ function Login() {
                     </button>
                     <p className="mt-4 text-center">
                         Are you new user ?{' '}
-                        <span className="text-blue-500 font-bold">
-                            <Link to="/signup">Sign Up</Link>
+                        <span className="text-blue-500 font-bold hover:text-blue-900">
+                            <Link to="/" >Sign Up</Link>
                         </span>
                     </p>
                 </div>
