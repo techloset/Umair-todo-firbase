@@ -5,29 +5,47 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 function Login() {
     const navigate = useNavigate()
-    const [values, setValues] = useState({
-
-        email: "",
-        password: ""
-    })
-    const [errMes, setErrMes] = useState("")
+    const [errors, setErrors] = useState({});
+    const [values, setValues] = useState({ email: "", password: "" })
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false)
-    const handleSubmission = () => {
-        if (!values.email || !values.password) {
-            setErrMes('Fill all input Field');
-            return;
+    const validate = () => {
+        let isValid = true;
+        let errors = {};
+        if (!values.name) {
+            errors.name = 'Name is required';
+            isValid = false;
         }
-        setErrMes("");
-        setSubmitButtonDisabled(true)
-        signInWithEmailAndPassword(auth, values.email, values.password).then(async (res) => {
-            setSubmitButtonDisabled(false)
-            navigate('/todo')
-        })
-            .catch((err) => {
+        if (!values.email) {
+            errors.email = 'Email is required';
+            isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+            errors.email = 'Email is invalid';
+            isValid = false;
+        }
+        if (!values.password) {
+            errors.password = 'Password is required';
+            isValid = false;
+        } else if (values.password.length < 6) {
+            errors.password = 'Password must be at least 6 characters';
+            isValid = false;
+        }
+        setErrors(errors);
+        return isValid;
+    }
+    const handleSubmission = (e) => {
+        e.preventDefault();
+        if (validate()) {
+            setSubmitButtonDisabled(true)
+            signInWithEmailAndPassword(auth, values.email, values.password).then(async (res) => {
                 setSubmitButtonDisabled(false)
-                setErrMes(err.message)
-                console.log('err', err.message);
+                navigate('/todo')
             })
+                .catch((err) => {
+                    setSubmitButtonDisabled(false)
+
+                })
+        }
+
     }
     return (
         <div className="h-screen bg-gradient-to-r from-sky-500 to-indigo-500 flex   justify-center items-center">
@@ -45,6 +63,7 @@ function Login() {
 
                         onChange={(event) => setValues((prev) => ({ ...prev, email: event.target.value }))}
                     />
+                    {errors.email && <p className='text-red-600 text-[15px] font-medium'>{errors.email}</p>}
                 </div>
                 <div className="flex flex-col  mt-3">
                     <label className="text-gray-800 font-bold" >
@@ -56,9 +75,10 @@ function Login() {
                         placeholder="Enter Password"
                         onChange={(event) => setValues((prev) => ({ ...prev, password: event.target.value }))}
                     />
+                    {errors.password && <p className='text-red-600 text-[15px] font-medium'>{errors.password}</p>}
                 </div>
                 <div className="mt-8 flex flex-col justify-center">
-                    <b className="text-red-500">{errMes}</b>
+                    {/* <b className="text-red-500">{errMes}</b> */}
                     <button
                         className="px-8 py-2 bg-sky-400 text-black hover:text-white rounded-md hover:bg-sky-600 transition-colors duration-600 "
                         onClick={handleSubmission}
