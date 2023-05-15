@@ -33,6 +33,7 @@ function Home(props) {
         } catch (error) {
         }
     }, [])
+  
     const alpha = (e) => {
         setNaming(e.target.value)
     }

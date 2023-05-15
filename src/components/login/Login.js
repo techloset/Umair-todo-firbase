@@ -8,13 +8,11 @@ function Login() {
     const [errors, setErrors] = useState({});
     const [values, setValues] = useState({ email: "", password: "" })
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false)
+    
     const validate = () => {
         let isValid = true;
         let errors = {};
-        if (!values.name) {
-            errors.name = 'Name is required';
-            isValid = false;
-        }
+      
         if (!values.email) {
             errors.email = 'Email is required';
             isValid = false;
@@ -32,12 +30,14 @@ function Login() {
         setErrors(errors);
         return isValid;
     }
+  
     const handleSubmission = (e) => {
         e.preventDefault();
         if (validate()) {
             setSubmitButtonDisabled(true)
             signInWithEmailAndPassword(auth, values.email, values.password).then(async (res) => {
                 setSubmitButtonDisabled(false)
+
                 navigate('/todo')
             })
                 .catch((err) => {

@@ -48,7 +48,7 @@ const SignUp = () => {
       isvalid = false
 
     } else if (values.password.length < 6) {
-      errors.password = "Password must be at least 8 characters"
+      errors.password = "Password must be at least 6 characters"
       isvalid = false
     }
     setErrors(errors)
@@ -84,8 +84,8 @@ const SignUp = () => {
           </label>
           <input
             className="w-full py-2 px-3 border border-gray-400 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-            type="email"
-            placeholder="Enter Email"
+            type="text"
+            placeholder="Enter Name"
             onChange={(event) => setValues((prev) => ({ ...prev, name: event.target.value }))}
           />
           {errors.name && <p className='text-red-600 text-[15px] font-medium'>{errors.name}</p>}
@@ -108,8 +108,8 @@ const SignUp = () => {
           </label>
           <input
             className="w-full py-2 px-3 border border-gray-400 rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-            type="email"
-            placeholder="Enter Email"
+            type="password"
+            placeholder="Enter Password"
             onChange={(event) => setValues((prev) => ({ ...prev, password: event.target.value }))}
           />
           {errors.password && <p className='text-red-600 text-[15px] font-medium'>{errors.password}</p>}
